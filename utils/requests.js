@@ -9,6 +9,10 @@ const { BASE_URL, header, timeout } = config
 
 const request = (_url, method, data, showLoadingIcon = true, hiddenTip,showLoadingTitle='加载中...') => {
   const url = BASE_URL + _url
+
+  // if(!getApp().globalData.openid) {
+  //   //wx.navigateTo("/")
+  // }
   //showLoadingIcon && showLoading(showLoadingTitle)
     //header["Authorization"]='Bearer '+utils.getAccessToken();
     return new Promise((resolve, reject) => {
@@ -26,24 +30,9 @@ const request = (_url, method, data, showLoadingIcon = true, hiddenTip,showLoadi
           if(statusCode == 200) {
             if (code === 1) {
               resolve(data.data)
-            } else { /*
-              if (message === '验证结果不一致') {
-                message = '请使用您本人姓名申请的手机号进行注册。感谢理解和支持！'
-              }
-              if (message === '手机与验证码不匹配') {
-                message = '您输入的短信验证码不正确'
-              }
-              !hiddenTip && $error(message, 'none')*/
+            } else { 
             }
           } else {
-            /*
-            if (message === '验证结果不一致') {
-              message = '请使用您本人姓名申请的手机号进行注册。感谢理解和支持！'
-            }
-            if (message === '手机与验证码不匹配') {
-              message = '您输入的短信验证码不正确'
-            }
-            !hiddenTip && $error(message, 'none')*/
             reject(data)
           }
         },

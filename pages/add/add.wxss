@@ -1,1 +1,6 @@
 /* pages/add/add.wxss */
+.form-body {
+  padding: 5rpx;
+  border: 1rpx solid #e8e9e7;
+  margin: 15rpx;
+}
