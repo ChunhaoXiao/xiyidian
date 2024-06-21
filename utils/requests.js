@@ -7,7 +7,7 @@ const { BASE_URL, header, timeout } = config
 //   $error
 // } = utils
 
-const request = (_url, method, data, showLoadingIcon = true, hiddenTip,showLoadingTitle='加载中...') => {
+const request = (_url, method, data, response_type='text',showLoadingIcon = true, hiddenTip='',showLoadingTitle='加载中...') => {
   const url = BASE_URL + _url
 
   // if(!getApp().globalData.openid) {
@@ -22,18 +22,30 @@ const request = (_url, method, data, showLoadingIcon = true, hiddenTip,showLoadi
         data,
         header,
         timeout,
+        responseType:response_type,
         success(res) {
-          console.log("res", res)
+          console.log("res::::", res)
           //hideLoading()
           const { statusCode, data } = res
           let { code, message = 'Error' } = data
           if(statusCode == 200) {
             if (code === 1) {
-              resolve(data.data)
+              console.log('code === 1')
+              console.log('data is:', data)
+              console.log('response_type',response_type)
+              if(response_type == 'arraybuffer') {
+                console.log('buffer-->', data)
+                resolve(data)
+              }else {
+                resolve(data.data)
+              }
+              
             } else { 
             }
           } else {
+            console.log("rejected:",data)
             reject(data)
+
           }
         },
         fail(res) {
@@ -42,6 +54,7 @@ const request = (_url, method, data, showLoadingIcon = true, hiddenTip,showLoadi
           reject(res.data)
         },
         complete(res) {
+          console.log('data in completed allback', res)
         }
       })
     })

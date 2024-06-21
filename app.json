@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/add/add",
+    "pages/qrcode/qrcode",
     "pages/index/index",
     "pages/logs/logs"
   ],

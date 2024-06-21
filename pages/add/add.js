@@ -1,5 +1,6 @@
 // pages/add/add.js
 const API = require('../../utils/api')
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -7,7 +8,13 @@ Page({
   data: {
     type:"",
     cate:[],
-    formData:null,
+    
+    formData:{
+      1:{
+        quantity:1
+      }
+    },
+
     quantity:1,
     forms:[1]
   },
@@ -35,7 +42,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    //this.onChange()
   },
 
   /**
@@ -72,6 +79,7 @@ Page({
   onShareAppMessage() {
 
   },
+
   onChange(e) {
     let order = e.target.dataset.order
     console.log("order:", order)
@@ -117,11 +125,13 @@ Page({
     
   },
   submitForm() {
-    console.log(this.data.formData)
+    const openId = app.globalData.openId
+    console.log('this.data.formData',this.data.formData)
     console.log(Object.values(this.data.formData))
-    const postData = {openid:"xxx", cloth:Object.values(this.data.formData)}
-    API.clothSave(postData).then(data => {
-      console.log(data)
+    const postData = {openid:openId, cloth:Object.values(this.data.formData)}
+    API.clothSave(postData,openId).then(data => {
+      console.log("save result:",data)
+      wx.navigateTo({url:"/pages/qrcode/qrcode"})
     })
   }
 })

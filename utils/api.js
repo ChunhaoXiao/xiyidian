@@ -6,7 +6,11 @@ module.exports = {
   login:(code) => {
     return request(`/login?code=${code}`,'get')
   },
-  clothSave:(data) => {
-    return request(`/cloth/save`,'post', data)
+  clothSave:(data,openid) => {
+    return request(`/cloth/save?openId=${openid}`,'post', data)
+  },
+
+  getQrcode:() => {
+    return request(`/wechat/qrcode`,'get',{},'arraybuffer')
   }
 }
