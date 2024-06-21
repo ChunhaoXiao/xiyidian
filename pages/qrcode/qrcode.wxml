@@ -1,0 +1,3 @@
+<!--pages/qrcode/qrcode.wxml-->
+<text>pages/qrcode/qrcode.wxml</text>
+<image src="{{qrcodeUrl}}"/>
